@@ -33,7 +33,13 @@ class AndroidNotification implements JsonSerializable
         $title_loc_key,
         /**@var array**/
         $title_loc_args;
-
+        /**@var string**/
+        $channel_id;
+        /**@var boolean**/
+        $sticky;   
+        /**@var boolean**/
+        $image;   
+     
     function __get($k){return $this->{$k};}
     function __set($k,$v){$this->{$k}=$v;}
 
@@ -51,6 +57,9 @@ class AndroidNotification implements JsonSerializable
             'body_loc_args' => $this->body_loc_args,
             'title_loc_key' => $this->title_loc_key,
             'title_loc_args' => $this->title_loc_args,
+            'channel_id' => $this->channel_id,
+            'sticky' => $this->sticky,
+            'image' => $this->image,
         ]);
     }
 }
