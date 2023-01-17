@@ -10,6 +10,12 @@ use JsonSerializable;
  */
 class AndroidNotification implements JsonSerializable
 {
+    const
+        VISIBILITY_UNSPECIFIED='VISIBILITY_UNSPECIFIED',
+        PRIVATE='PRIVATE',    
+        PUBLIC='PUBLIC',    
+        SECRET='SECRET';    
+    
     public
         /**@var string**/
         $title,
@@ -32,17 +38,37 @@ class AndroidNotification implements JsonSerializable
         /**@var string**/
         $title_loc_key,
         /**@var array**/
-        $title_loc_args;
+        $title_loc_args,
         /**@var string**/
         $channel_id;
         /**@var boolean**/
-        $sticky;   
+        $sticky,   
+        /**@var ENUM**/
+        $visibility = self::VISIBILITY_UNSPECIFIED,
         /**@var string**/
         $image;   
      
     function __get($k){return $this->{$k};}
     function __set($k,$v){$this->{$k}=$v;}
 
+     /**
+     * @param string $v
+     * @throws InvalidArgumentException
+     * @return AndroidNotification
+     */
+    function setVisibility($v){
+        switch ($v){
+            default:
+                throw new InvalidArgumentException('Invalid Android message visibility!');
+            case self::VISIBILITY_UNSPECIFIED:
+            case self::PRIVATE:
+            case self::PUBLIC:
+            case self::SECRET:
+                $this->visibility=$v;
+        }
+        return $this;
+    }
+    
     public function jsonSerialize()
     {
         return array_filter([
@@ -59,6 +85,7 @@ class AndroidNotification implements JsonSerializable
             'title_loc_args' => $this->title_loc_args,
             'channel_id' => $this->channel_id,
             'sticky' => $this->sticky,
+            'visibility' => $this->visibility,
             'image' => $this->image,
         ]);
     }
