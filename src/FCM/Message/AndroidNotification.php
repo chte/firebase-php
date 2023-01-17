@@ -37,7 +37,7 @@ class AndroidNotification implements JsonSerializable
         $channel_id;
         /**@var boolean**/
         $sticky;   
-        /**@var boolean**/
+        /**@var string**/
         $image;   
      
     function __get($k){return $this->{$k};}
