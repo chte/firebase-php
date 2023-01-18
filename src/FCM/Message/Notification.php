@@ -37,7 +37,7 @@ class Notification implements JsonSerializable
     }
     
     function setImage($image){
-        $this->body = $body;
+        $this->image = $image;
         return $this;
     }
 
@@ -46,7 +46,7 @@ class Notification implements JsonSerializable
         return [
             'title' => $this->title,
             'body'  => $this->body,
-            'image'  => $this->image,
+            'image' => $this->image,
         ];
     }
 }
